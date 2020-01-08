@@ -191,7 +191,6 @@
                             <div class="contest-block">
                                 {{ contest_head(contest) }}
                                 {% if contest.start_time %}
-                                    <br>
                                     {% if contest.time_before_end %}
                                         <span class="time">{{ _('Ends in %(countdown)s', countdown=contest.time_before_end|as_countdown) }}</span>
                                     {% endif %}
@@ -207,7 +206,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <br>
         {% endif %}
 
         <h4>{{ _('Upcoming Contests') }}</h4>
@@ -225,7 +223,6 @@
                             <div class="contest-block">
                                 {{ contest_head(contest) }}
                                 {% if contest.start_time %}
-                                    <br>
                                     {% if contest.time_before_start %}
                                         <span class="time">{{ _('Starting in %(countdown)s.', countdown=contest.time_before_start|as_countdown) }}</span>
                                     {% endif %}
@@ -239,9 +236,7 @@
             </table>
         {% else %}
             <i>{{ _('There are no scheduled contests at this time.') }}</i>
-            <br>
         {% endif %}
-        <br>
 
         {% if past_contests %}
             <h4>{{ _('Past Contests') }}</h4>
