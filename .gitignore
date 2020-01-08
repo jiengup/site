@@ -11,3 +11,7 @@ resources/content-description.css
 resources/ranks.css
 resources/table.css
 sass_processed
+src/
+node_modules/
+static/
+bridgelog.log
