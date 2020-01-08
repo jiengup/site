@@ -32,7 +32,7 @@
             <a href="{{ url('request_organization', organization.id, organization.slug) }}"
                class="unselectable button full">{{ _('Request membership') }}</a>
         {% endif %}
-        <hr>
+        <div class="ui divider"></div>
     {% endif %}
 
     {% if can_edit %}
