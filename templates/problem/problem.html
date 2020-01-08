@@ -76,7 +76,7 @@
         </a>
     {% endif %}
 
-    <hr style="padding-bottom: 0.3em">
+    <div class="ui divider"></div>
 
     {% if request.user.is_authenticated and has_submissions %}
         <div>
@@ -87,11 +87,11 @@
     <div><a href="{{ url('ranked_submissions', problem.code) }}">{{ _('Best submissions') }}</a></div>
     {% if editorial and editorial.is_public and 
             not (request.user.is_authenticated and request.profile.current_contest) %}
-        <hr>
+        <div class="ui divider"></div>
         <div><a href="{{ url('problem_editorial', problem.code) }}">{{ _('Read editorial') }}</a></div>
     {% endif %}
     {% if can_edit_problem %}
-        <hr>
+        <div class="ui divider"></div>
         <div>
             <a href="{{ url('problem_ticket_list', problem.code) }}">{{ _('Manage tickets') }}
                 {% if num_open_tickets %}<span class="badge">{{ num_open_tickets }}</span>{% endif %}
@@ -122,7 +122,7 @@
         </div>
     {% endif %}
 
-    <hr style="padding-top: 0.3em">
+    <div class="ui divider"></div>
 
     <div class="problem-info-entry">
         <i class="icon check"></i><span class="pi-name">{{ _('Points:') }}</span>
@@ -159,7 +159,7 @@
         {% endfor %}
     </div>
 
-    <hr style="padding-top: 0.7em">
+    <div class="ui divider"></div>
 
     {% cache 86400 'problem_authors' problem.id LANGUAGE_CODE %}
         {% with authors=problem.authors.all() %}
