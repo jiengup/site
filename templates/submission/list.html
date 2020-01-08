@@ -352,18 +352,6 @@
                                     {% endfor %}
                                 </div>
                             </div>
-
-                            <div class="ui multiple fluid search selection dropdown">
-                                <input name="status" type="hidden">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">{{ _('Status') }}</div>
-                                <div class="menu">
-                                    {% for id, name in all_statuses %}
-                                        <div class="item {% if id in selected_statuses %}selected{% endif %}" value="{{ id }}">{{ name }}</div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
                             <div class="ui multiple fluid search selection dropdown">
                                 <input name="language" type="hidden">
                                 <i class="dropdown icon"></i>
