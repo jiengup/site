@@ -50,9 +50,9 @@
 {% block user_content %}
     {% if pp_breakdown %}
         <h3 class="pp-breakdown-header">{{ _('Points Breakdown') }}</h3>
-        <div id="submissions-table" class="ui celled table">
+        <table id="submissions-table" class="ui celled table">
             {% include "user/pp-table-body.html" %}
-        </div>
+        </table>
         {% if pp_has_more %}
             <div id="pp-load-link-wrapper">
                 <a id="pp-load-more-link" href="javascript:load_more_pp()">{{ _('Load more...') }}</a>
