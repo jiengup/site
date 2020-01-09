@@ -160,166 +160,137 @@
 
     <div id="common-content">
         {% block before_table %}{% endblock %}
-        {% if not request.in_contest %} <!-- TODO: Semantic -->
-            <div id="content-right" class="problems">
-                <div class="info-float">
-                    {% include "problem/search-form.html" %}
-                    {% if hot_problems %}
-                        <div class="sidebox">
-                            <h3>{{ _('Hot problems') }} <i class="fa fa-fire"></i></h3>
-                            <div class="sidebox-content">
-                                <ul class="problem-list">{% for problem in hot_problems %}
-                                    <li><a href="{{ url('problem_detail', problem.code) }}" class="hot-problem-link">
-                                        {{ problem.name }}
-                                    </a></li>
-                                {% endfor %}</ul>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        {% endif %}
-        <div id="content-left" class="problems">
-            <table id="problem-table" class="ui celled table">
-                <thead>
-                <tr>
-                    {% if request.in_contest %}
-                        {% if request.user.is_authenticated %}
-                            <th class="solved"><i class="icon check"></i></th>
-                        {% endif %}
-                        <th class="problem">{{ _('Problem') }}</th>
-                        <th class="category">{{ _('Category') }}</th>
-                        {% if show_types %}
-                            <th>{{ _('Types') }}</th>
-                        {% endif %}
-                        <th class="points">{{ _('Points') }}</th>
-                        <th class="users">{{ _('Users') }}</th>
-                    {% else %}
-                        {% if request.user.is_authenticated %}
-                            <th class="solved">
-                                <a href="{{ sort_links.solved }}"><i class="icon check"></i>{{ sort_order.solved }}
-                                </a>
-                            </th>
-                        {% endif %}
-                        <th class="problem">
-                            <a href="{{ sort_links.name }}">{{ _('Problem') }}{{ sort_order.name }}</a>
-                        </th>
-                        <th class="category">
-                            <a href="{{ sort_links.group }}">{{ _('Category') }}{{ sort_order.group }}</a>
-                        </th>
-                        {% if show_types %}
-                            <th>
-                                <a href="{{ sort_links.type }}">{{ _('Types') }}{{ sort_order.type }}</a>
-                            </th>
-                        {% endif %}
-                        <th class="points">
-                            <a href="{{ sort_links.points }}">{{ _('Points') }}{{ sort_order.points }}</a>
-                        </th>
-                        <th class="ac-rate">
-                            <a href="{{ sort_links.ac_rate }}">{{ _('AC %%') }}{{ sort_order.ac_rate }}</a>
-                        </th>
-                        <th class="users">
-                            <a href="{{ sort_links.user_count }}">{{ _('Users') }}{{ sort_order.user_count }}</a>
-                        </th>
-                    {% endif %}
-                </tr>
-                </thead>
-                <tbody>
-                {% for problem in problems %}
+        <div class="ui stackable grid">
+            <div id="content-left" class="twelve wide column problems">
+                <table id="problem-table" class="ui celled table">
+                    <thead>
                     <tr>
-                        {% if request.user.is_authenticated %}
-                            {% if problem.id in completed_problem_ids %}
-                                <td solved="1">
-                                    <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
-                                        {% if problem.is_public or request.in_contest %}
-                                            <i class="icon solved-problem-color check circle"></i>
-                                        {% else %}
-                                            <i class="icon solved-problem-color lock"></i>
-                                        {% endif %}
+                        {% if request.in_contest %}
+                            {% if request.user.is_authenticated %}
+                                <th class="solved"><i class="icon check"></i></th>
+                            {% endif %}
+                            <th class="problem">{{ _('Problem') }}</th>
+                            <th class="category">{{ _('Category') }}</th>
+                            {% if show_types %}
+                                <th>{{ _('Types') }}</th>
+                            {% endif %}
+                            <th class="points">{{ _('Points') }}</th>
+                            <th class="users">{{ _('Users') }}</th>
+                        {% else %}
+                            {% if request.user.is_authenticated %}
+                                <th class="solved">
+                                    <a href="{{ sort_links.solved }}"><i class="icon check"></i>{{ sort_order.solved }}
                                     </a>
-                                </td>
-                            {% elif problem.id in attempted_problems %}
-                                <td solved="0">
-                                    <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                </th>
+                            {% endif %}
+                            <th class="problem">
+                                <a href="{{ sort_links.name }}">{{ _('Problem') }}{{ sort_order.name }}</a>
+                            </th>
+                            <th class="category">
+                                <a href="{{ sort_links.group }}">{{ _('Category') }}{{ sort_order.group }}</a>
+                            </th>
+                            {% if show_types %}
+                                <th>
+                                    <a href="{{ sort_links.type }}">{{ _('Types') }}{{ sort_order.type }}</a>
+                                </th>
+                            {% endif %}
+                            <th class="points">
+                                <a href="{{ sort_links.points }}">{{ _('Points') }}{{ sort_order.points }}</a>
+                            </th>
+                            <th class="ac-rate">
+                                <a href="{{ sort_links.ac_rate }}">{{ _('AC %%') }}{{ sort_order.ac_rate }}</a>
+                            </th>
+                            <th class="users">
+                                <a href="{{ sort_links.user_count }}">{{ _('Users') }}{{ sort_order.user_count }}</a>
+                            </th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for problem in problems %}
+                        <tr>
+                            {% if request.user.is_authenticated %}
+                                {% if problem.id in completed_problem_ids %}
+                                    <td solved="1">
+                                        <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                            {% if problem.is_public or request.in_contest %}
+                                                <i class="icon solved-problem-color check circle"></i>
+                                            {% else %}
+                                                <i class="icon solved-problem-color lock"></i>
+                                            {% endif %}
+                                        </a>
+                                    </td>
+                                {% elif problem.id in attempted_problems %}
+                                    <td solved="0">
+                                        <a href="{{ url('user_submissions', problem.code, request.user.username) }}">
+                                            {% if problem.is_public or request.in_contest %}
+                                                <i class="icon attempted-problem-color minus"></i>
+                                            {% else %}
+                                                <i class="icon attempted-problem-color lock"></i>
+                                            {% endif %}
+                                        </a>
+                                    </td>
+                                {% else %}
+                                    <td solved="-1">
                                         {% if problem.is_public or request.in_contest %}
-                                            <i class="icon attempted-problem-color minus"></i>
+                                            <!-- No icon for unsolved -->
                                         {% else %}
-                                            <i class="icon attempted-problem-color lock"></i>
+                                            <i class="icon unsolved-problem-color lock"></i>
                                         {% endif %}
-                                    </a>
-                                </td>
-                            {% else %}
-                                <td solved="-1">
-                                    {% if problem.is_public or request.in_contest %}
-                                        <!-- No icon for unsolved -->
-                                    {% else %}
-                                        <i class="icon unsolved-problem-color lock"></i>
-                                    {% endif %}
+                                    </td>
+                                {% endif %}
+                            {% endif %}
+                            <td class="problem">
+                                <a href="{{ url('problem_detail', problem.code) }}">{{ problem.i18n_name }}</a>
+                            </td>
+                            <td class="category">{{ problem.group.full_name }}</td>
+                            {% if show_types %}
+                                <td class="types">
+                                    {% for type in problem.types_list %}
+                                        <span class="type-tag">{{ type }}</span>{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
                                 </td>
                             {% endif %}
-                        {% endif %}
-                        <td class="problem">
-                            <a href="{{ url('problem_detail', problem.code) }}">{{ problem.i18n_name }}</a>
-                        </td>
-                        <td class="category">{{ problem.group.full_name }}</td>
-                        {% if show_types %}
-                            <td class="types">
-                                {% for type in problem.types_list %}
-                                    <span class="type-tag">{{ type }}</span>{% if not loop.last %}, {% endif %}
-                                {% endfor %}
+                            <td class="p">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %}</td>
+                            {% if not request.in_contest %}
+                                <td class="ac-rate">{{ problem.ac_rate|floatformat(1) }}%</td>
+                            {% endif %}
+                            <td class="users">
+                                <a href="{{ url('ranked_submissions', problem.code) }}">
+                                    {% if not request.in_contest or not hide_contest_scoreboard %}
+                                        {{ problem.user_count }}
+                                    {% else %}
+                                        ???
+                                    {% endif %}
+                                </a>
                             </td>
-                        {% endif %}
-                        <td class="p">{{ problem.points|floatformat }}{% if problem.partial %}p{% endif %}</td>
-                        {% if not request.in_contest %}
-                            <td class="ac-rate">{{ problem.ac_rate|floatformat(1) }}%</td>
-                        {% endif %}
-                        <td class="users">
-                            <a href="{{ url('ranked_submissions', problem.code) }}">
-                                {% if not request.in_contest or not hide_contest_scoreboard %}
-                                    {{ problem.user_count }}
-                                {% else %}
-                                    ???
-                                {% endif %}
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            {% if page_obj.num_pages > 1 %}
-                {% include "list-pages.html" %}
-            {% endif %}
-        </div>
-
-        {% if not request.in_contest %}
-        <div class="four wide column problems">
-                <div class="info-float">
-                    {% include "problem/search-form.html" %}
-                    {% if hot_problems %}
-                    <div class="ui card">
-                            <div class="content">
-                                <div class="header">{{ _('Hot problems') }} <i class="icon hotjar"></i></div>
-                            </div>
-                            <div class="content">
-                                <div class="ui small feed">
-                                    {% for problem in hot_problems %}
-                                    <div class="event">
-                                        <div class="content">
-                                            <div class="summary">
-                                                    <a href="{{ url('problem_detail', problem.code) }}" class="hot-problem-link">
-                                                            {{ problem.name }}
-                                                        </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if page_obj.num_pages > 1 %}
+                    {% include "list-pages.html" %}
+                {% endif %}
+            </div>
+            {% if not request.in_contest %}
+                <div id="content-right" class="four wide column problems">
+                    <div class="info-float">
+                        {% include "problem/search-form.html" %}
+                        {% if hot_problems %}
+                            <div class="sidebox">
+                                <h3>{{ _('Hot problems') }} <i class="fa fa-fire"></i></h3>
+                                <div class="sidebox-content">
+                                    <ul class="problem-list">{% for problem in hot_problems %}
+                                        <li><a href="{{ url('problem_detail', problem.code) }}" class="hot-problem-link">
+                                            {{ problem.name }}
+                                        </a></li>
+                                    {% endfor %}</ul>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
