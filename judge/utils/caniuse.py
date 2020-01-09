@@ -1,7 +1,34 @@
 import requests
 from ua_parser import user_agent_parser
+import os
+import json
 
-_SUPPORT_DATA = requests.get('https://cdn.jsdelivr.net/npm/caniuse@0.1.3/data/data.json').json()['data']
+_SUPPORT_DATA = None
+
+caniuse_json_path = os.path.realpath(__file__).split("/")
+caniuse_json_path[len(caniuse_json_path) - 1] = "caniuse.json"
+caniuse_json_path = "/".join(caniuse_json_path)
+
+try:
+    data = json.load(open(caniuse_json_path, "r"))
+    _SUPPORT_DATA = data
+    print("[caniuse] Read from cache.")
+    if type(_SUPPORT_DATA) != type({}):
+        print("[caniuse] Bad cache. Rollbacking.")
+        os.unlink(caniuse_json_path)
+        _SUPPORT_DATA = None
+except Exception:
+    pass
+
+if _SUPPORT_DATA == None:
+    print("[caniuse] Fetching caniuse data from jsdelivr.")
+    _SUPPORT_DATA = requests.get('https://cdn.jsdelivr.net/npm/caniuse@0.1.3/data/data.json').json()['data']
+    print("[caniuse] Fetch completed.")
+    try:
+        json.dump(_SUPPORT_DATA, open(caniuse_json_path, "w"))
+        print("[caniuse] Cache OK.")
+    except Exception:
+        print("[caniuse] Failed to cache the results")
 
 SUPPORT = 'y'
 PARTIAL_SUPPORT = 'a'

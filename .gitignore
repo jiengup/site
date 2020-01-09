@@ -15,3 +15,4 @@ src/
 node_modules/
 static/
 bridgelog.log
+judge/utils/caniuse.json
