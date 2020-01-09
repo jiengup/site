@@ -21,16 +21,16 @@
         {% if request.profile in organization %}
             <form method="post" action="{{ url('leave_organization', organization.id, organization.slug) }}">
                 {% csrf_token %}
-                <input type="submit" class="unselectable button full leave-organization" value="{{ _('Leave organization') }}">
+                <input type="submit" class="ui button" value="{{ _('Leave organization') }}">
             </form>
         {% elif organization.is_open %}
             <form method="post" action="{{ url('join_organization', organization.id, organization.slug) }}">
                 {% csrf_token %}
-                <input type="submit" class="unselectable button full" value="{{ _('Join organization') }}">
+                <input type="submit" class="ui button" value="{{ _('Join organization') }}">
             </form>
         {% else %}
             <a href="{{ url('request_organization', organization.id, organization.slug) }}"
-               class="unselectable button full">{{ _('Request membership') }}</a>
+               class="ui button">{{ _('Request membership') }}</a>
         {% endif %}
         <div class="ui divider"></div>
     {% endif %}
