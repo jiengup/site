@@ -258,6 +258,7 @@
 
 {% block post_description_end %}
     {% if request.user.is_authenticated and not request.profile.mute %}
+        <div class="ui divider"></div>
         <a href="{{ url('new_problem_ticket', problem.code) }}" class="ui button clarify">
             {%- if contest_problem and contest_problem.contest.use_clarifications and request.profile.current_contest.live -%}
                 {{ _('Request clarification') }}
@@ -265,7 +266,6 @@
                 {{ _('Report an issue') }}
             {%- endif -%}
         </a>
-        <div class="ui divider"></div>
     {% endif %}
 {% endblock %}
 
