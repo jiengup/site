@@ -12,7 +12,7 @@ from django.urls import reverse
 from requests import HTTPError
 from reversion import revisions
 from social_core.backends.github import GithubOAuth2
-from social_core.exceptions import InvalidEmail, SocialAuthBaseException
+from social_core.exceptions import AuthException, SocialAuthBaseException
 from social_core.pipeline.partial import partial
 from social_django.middleware import SocialAuthExceptionMiddleware as OldSocialAuthExceptionMiddleware
 
@@ -21,6 +21,9 @@ from judge.models import Language, Profile
 
 logger = logging.getLogger('judge.social_auth')
 
+class InvalidEmail(AuthException):
+    def __str__(self):
+        return 'Email couldn\'t be validated. Note that Stack Overflow can only be used to log in, not registering, since it does not give your email.'
 
 class GitHubSecureEmailOAuth2(GithubOAuth2):
     name = 'github-secure'
@@ -49,7 +52,7 @@ def slugify_username(username, renotword=re.compile(r'[^\w]')):
 
 
 def verify_email(backend, details, *args, **kwargs):
-    if not details['email']:
+    if ("email" not in details) or (not details['email']):
         raise InvalidEmail(backend)
 
 

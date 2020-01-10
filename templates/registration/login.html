@@ -60,22 +60,21 @@
         </form>
 
         {% if form.has_google_auth or form.has_github_auth %}
-            <h4>{{ _('Or log in with...') }}</h4>
-            {% if form.has_google_auth %}
-                <a href="{{ url('social:begin', "google-oauth2") }}?next={{ next }}" class="social google-icon">
-                    <i class="icon large google"></i>
-                </a>
-            {% endif %}
-            {% if form.has_github_auth %}
-                <a href="{{ url('social:begin', "github-secure") }}?next={{ next }}" class="social github-icon">
-                    <i class="icon large github"></i>
-                </a>
-            {% endif %}
-            {% if form.has_dropbox_auth %}
-                <a href="{{ url('social:begin', "dropbox-oauth2") }}?next={{ next }}" class="social dropbox-icon">
-                    <i class="icon large dropbox"></i>
-                </a>
-            {% endif %}
+        <h4>{{ _('Or log in with...') }}</h4>
+        {% if form.has_google_auth %}
+            <a href="{{ url('social:begin', "google-oauth2") }}?next={{ next }}" class="social google-icon">
+                <i class="icon large google"></i>
+            </a>
+        {% endif %}
+        {% if form.has_github_auth %}
+            <a href="{{ url('social:begin', "github-secure") }}?next={{ next }}" class="social github-icon">
+                <i class="icon large github"></i>
+            </a>
+        {% endif %}
+        {% if form.has_stackoverflow_auth %}
+            <a href="{{ url('social:begin', "stackoverflow") }}?next={{ next }}" class="social github-icon">
+                <i class="icon large stack overflow"></i>
+            </a>
         {% endif %}
     </div>
 </div>
