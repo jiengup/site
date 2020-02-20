@@ -1,4 +1,10 @@
-DMOJ: Modern Online Judge [![Build Status](https://github.com/DMOJ/online-judge/workflows/build/badge.svg)](https://github.com/DMOJ/online-judge/actions/) [![Slack](https://slack.dmoj.ca/badge.svg)](https://slack.dmoj.ca)
+**This online-judge platform, SchOJ, is a fork of DMOJ with many UI / infrastructure changes. To get started, see [this wiki](https://github.com/SchOJ/dmoj-dockercompose/wiki).**
+
+Most of the following info may also apply to SchOJ.
+
+---
+
+DMOJ: Modern Online Judge
 =====
 
 A modern [open-source](https://github.com/DMOJ/online-judge/blob/master/LICENSE) online judge and contest platform system. It has been used to host hundreds of competitions, including several national olympiads.
