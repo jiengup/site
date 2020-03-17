@@ -255,7 +255,7 @@
             </a>
             {% for node in mptt_tree(nav_bar) %}
             <a href="{{ node.path }}" class="{% if node.key in nav_tab %}active{% endif %} item">
-                {{ user_trans(node.label) }}
+                {{ _(node.label) }}
             </a>
             {% endfor %}
             <a href="/status" class="item">
