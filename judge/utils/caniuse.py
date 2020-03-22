@@ -10,7 +10,9 @@ caniuse_json_path[len(caniuse_json_path) - 1] = "caniuse.json"
 caniuse_json_path = "/".join(caniuse_json_path)
 
 try:
-    data = json.load(open(caniuse_json_path, "r"))
+    rfile = open(caniuse_json_path, "r")
+    data = json.load(rfile)
+    rfile.close()
     _SUPPORT_DATA = data
     print("[caniuse] Read from cache.")
     if type(_SUPPORT_DATA) != type({}):
@@ -22,10 +24,12 @@ except Exception:
 
 if _SUPPORT_DATA == None:
     print("[caniuse] Fetching caniuse data from jsdelivr.")
-    _SUPPORT_DATA = requests.get('https://cdn.jsdelivr.net/npm/caniuse@0.1.3/data/data.json').json()['data']
+    _SUPPORT_DATA = requests.get('https://cdn.jsdelivr.net/npm/caniuse@0.1.3/data/data.json', timeout=5).json()['data']
     print("[caniuse] Fetch completed.")
     try:
-        json.dump(_SUPPORT_DATA, open(caniuse_json_path, "w"))
+        wfile = open(caniuse_json_path, "w")
+        json.dump(_SUPPORT_DATA, wfile)
+        wfile.close()
         print("[caniuse] Cache OK.")
     except Exception:
         print("[caniuse] Failed to cache the results")
