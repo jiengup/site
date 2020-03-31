@@ -10,6 +10,7 @@ resources/style.css
 resources/content-description.css
 resources/ranks.css
 resources/table.css
+resources/martor-description.css
 sass_processed
 src/
 node_modules/
