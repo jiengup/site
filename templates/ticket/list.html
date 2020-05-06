@@ -258,26 +258,24 @@
             {% if page_obj.num_pages > 1 %}
                 {% include "list-pages.html" %}
             {% endif %}
-<<<<<<< HEAD
-            <table id="ticket-list" class="ui celled table h-scrollable-table">
-=======
-            <table id="ticket-list" class="table ">
->>>>>>> Make ticket list table horizontally scrollable
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>{{ _('ID') }}</th>
-                    <th>{{ _('Title') }}</th>
-                    <th>{{ _('User') }}</th>
-                    <th>{{ _('Assignees') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for ticket in tickets %}
-                    {% include "ticket/row.html" %}
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="h-scrollable-table">            
+                <table id="ticket-list" class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ _('ID') }}</th>
+                        <th>{{ _('Title') }}</th>
+                        <th>{{ _('User') }}</th>
+                        <th>{{ _('Assignees') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ticket in tickets %}
+                        {% include "ticket/row.html" %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% if page_obj.num_pages > 1 %}
                 {% include "list-pages.html" %}
             {% endif %}
