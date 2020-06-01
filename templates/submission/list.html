@@ -310,7 +310,7 @@
                 <tbody>
                 {% for submission in submissions %}
                     <tr class="submission-row" id="{{ submission.id }}">
-                        {% with problem_name=show_problem and submission.problem.i18n_name %}
+                        {% with problem_name=show_problem and (submission.problem.i18n_name or submission.problem.name) %}
                             {% include "submission/row.html" %}
                         {% endwith %}
                     </tr>
