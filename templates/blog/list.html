@@ -64,7 +64,7 @@
                 </section>
                 {% endfor %}
             </div>
-            {% if page_obj.num_pages > 1 %}
+            {% if page_obj.has_other_pages() %}
                 {% include "list-pages.html" %}
             {% endif %}
         </div>
