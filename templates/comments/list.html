@@ -4,7 +4,7 @@
         {% set logged_in = request.user.is_authenticated %}
         {% set profile = request.profile if logged_in else None %}
         {% for node in mptt_tree(comment_list) recursive %}
-        <div id="comment-{{ node.id }}" data-revision="{{ node.revisions - 1 }}" data-max-revision="{{ node.revisions - 1 }}"
+        <div id="comment-{{ node.id }}" data-revision=f:"{{ node.revisions - 1 }}" data-max-revision="{{ node.revisions - 1 }}"
           data-revision-ajax="{{ url('comment_revision_ajax', node.id) }}" class="comment">
           <div class="ui grid">
             <div class="info two wide column">
@@ -92,7 +92,7 @@
                   {% endif %}
                   <a data-featherlight="{{ url('comment_votes_ajax', node.id) }}"
                                                title="{{ _('Votes') }}" class="votes-link"><i class="fa fa-bar-chart fa-fw"></i></a>
-                  <a href="javascript:" title="{{ _('Hide') }}" data-id="{{ node.id }}" class="hide-comment"><i class="fa fa-trash fa-fw"></i></a>
+                  <a title="{{ _('Hide') }}" data-id="{{ node.id }}" class="hide-comment"><i class="fa fa-trash fa-fw"></i></a>
                   <a href="{{ url('admin:judge_comment_change', node.id) }}" title="{{ _('Admin') }}"><i class="fa fa-cog fa-fw"></i></a>
                   {% endif %}
                   {% endif %}
