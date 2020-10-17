@@ -49,7 +49,7 @@
 
 {% block user_content %}
     {% if pp_breakdown %}
-        <h3 class="pp-breakdown-header">{{ _('Points Breakdown') }}</h3>
+        <h3 class="pp-breakdown-header">{{ _('Points breakdown') }}</h3>
         <table id="submissions-table" class="ui celled table">
             {% include "user/pp-table-body.html" %}
         </table>
@@ -65,7 +65,7 @@
     {% if authored %}
         <div class="user-problem-group">
             <h3 class="unselectable toggle closed">
-                <i class="icon chevron right"></i>{{ _('Authored Problems') }} ({{ authored|length }})
+                <i class="icon chevron right"></i>{{ _('Authored problems') }} ({{ authored|length }})
             </h3>
             <table style="display: none" class="ui celled table toggled">
                 <thead>
