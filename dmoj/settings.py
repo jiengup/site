@@ -45,7 +45,8 @@ DMOJ_SSL = 0
 # Refer to dmoj.ca/post/103-point-system-rework
 DMOJ_PP_STEP = 0.95
 DMOJ_PP_ENTRIES = 100
-DMOJ_PP_BONUS_FUNCTION = lambda n: 300 * (1 - 0.997 ** n)  # noqa: E731
+def DMOJ_PP_BONUS_FUNCTION(n): return 300 * (1 - 0.997 ** n)  # noqa: E731
+
 
 NODEJS = '/usr/bin/node'
 EXIFTOOL = '/usr/bin/exiftool'
@@ -397,8 +398,8 @@ BLEACH_USER_SAFE_ATTRS = {
     'dfn': ['title'],
     'time': ['datetime'],
     'data': ['value'],
-    'td':  ['colspan', 'rowspan'],
-    'th':  ['colspan', 'rowspan'],
+    'td': ['colspan', 'rowspan'],
+    'th': ['colspan', 'rowspan'],
     'audio': ['autoplay', 'controls', 'crossorigin', 'muted', 'loop', 'preload', 'src'],
     'video': ['autoplay', 'controls', 'crossorigin', 'height', 'muted', 'loop', 'poster', 'preload', 'src', 'width'],
     'source': ['src', 'srcset', 'type'],

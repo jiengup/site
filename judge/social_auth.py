@@ -21,9 +21,12 @@ from judge.models import Language, Profile
 
 logger = logging.getLogger('judge.social_auth')
 
+
 class InvalidEmail(AuthException):
     def __str__(self):
-        return 'Email couldn\'t be validated. Note that Stack Overflow can only be used to log in, not registering, since it does not give your email.'
+        return 'Email couldn\'t be validated. Note that Stack Overflow can only be used to log in, \
+not registering, since it does not give your email.'
+
 
 class GitHubSecureEmailOAuth2(GithubOAuth2):
     name = 'github-secure'
