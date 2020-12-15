@@ -328,32 +328,27 @@
                         <div class="header">{{ _('Filter submissions') }}</div>
                     </div>
                     <div class="content">
-                        <form id="filter-form" name="form" action="" method="get">
-                            <div class="ui multiple fluid search selection dropdown">
-                                <input name="states" type="hidden">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">States</div>
-                                <div class="menu">
-                                    {% for id, name in all_statuses %}
-                                    <div class="item {% if id in selected_statuses %}selected{% endif %}" data-value="{{ id }}">{{ name }}</div>
-                                    {% endfor %}
+                        <div class="ui form">
+                            <form id="filter-form" name="form" action="" method="get">
+                                <div class="field">
+                                    <label>{{ _('States') }}</label>
+                                    <select name="states" multiple="" class="ui dropdown">
+                                        {% for id, name in all_statuses %}
+                                        <option {% if id in selected_statuses %}class="selected"{% endif %} value="{{ id }}">{{ name }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="ui multiple fluid search selection dropdown">
-                                <input name="language" type="hidden">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">{{ _('Language') }}</div>
-                                <div class="menu">
-                                    {% for code, name in all_languages %}
-                                    <div class="item {% if code in selected_languages %}selected{% endif %}" value="{{ code }}">{{ name }}</div>
-                                    {% endfor %}
+                                <div class="field">
+                                    <label>{{ _('Language') }}</label>
+                                    <select name="states" multiple="" class="ui dropdown">
+                                        {% for id, name in all_languages %}
+                                        <option {% if id in selected_languages %}class="selected"{% endif %} value="{{ id }}">{{ name }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="form-submit-group">
-                                <button id="go" onclick="form.submit()" class="ui button primary">{{
-                                    _('Go') }}</a>
-                            </div>
-                        </form>
+                                <button type="submit" class="ui button primary">{{ _('Go') }}</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
