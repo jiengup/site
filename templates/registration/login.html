@@ -59,7 +59,7 @@
             <input type="hidden" name="next" value="{{ next }}">
         </form>
 
-        {% if form.has_google_auth or form.has_github_auth or form.has_stackoverflow_auth %}
+        {% if form.has_google_auth or form.has_github_auth or form.has_azuread_auth %}
         <h4>{{ _('Or log in with...') }}</h4>
         {% if form.has_google_auth %}
             <a href="{{ url('social:begin', "google-oauth2") }}?next={{ next }}" class="social google-icon">
@@ -71,10 +71,11 @@
                 <i class="icon large github"></i>
             </a>
         {% endif %}
-        {% if form.has_stackoverflow_auth %}
-            <a href="{{ url('social:begin', "stackoverflow") }}?next={{ next }}" class="social github-icon">
-                <i class="icon large stack overflow"></i>
-            </a>
+        {% if form.has_azuread_auth %}
+            <a href="/login/azuread-oauth2/?next=/" class="social">
+                <i class="icon large microsoft"></i>
+            </a> <br />
+            <small>(Use this only if you have registered)</small>
         {% endif %}
         {% endif %}
     </div>
