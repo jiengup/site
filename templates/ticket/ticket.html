@@ -301,7 +301,7 @@
                     {% include "ticket/message.html" %}
                 {% endfor %}
             </main>
-            <hr>
+            <div class="ui divider"></div>
             <section class="message new-message">
                 <div class="info">
                     <a href="{{ url('user_page', request.user.username) }}" class="user">
@@ -371,35 +371,5 @@
                 {% endif %}
             </div>
         </aside>
-
-        <div class="ticket-messages">
-            <main id="messages" class="messages">
-                {% for message in ticket_messages %}
-                    {% include "ticket/message.html" %}
-                {% endfor %}
-            </main>
-            <div class="ui divider"></div>
-            <section class="message new-message">
-                <div class="info">
-                    <a href="{{ url('user_page', request.user.username) }}" class="user">
-                        <img src="{{ gravatar(request.user, 135) }}" class="gravatar">
-                        <div class="username {{ request.profile.css_class }}">{{ request.user.username }}</div>
-                    </a>
-                </div>
-                <div class="detail">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        {% if form.non_field_errors() or form.body.errors %}
-                            <div class="form-errors">
-                                {{ form.non_field_errors() }}
-                                {{ form.body.errors }}
-                            </div>
-                        {% endif %}
-                        <div class="body-block">{{ form.body }}</div>
-                        <button type="submit" class="submit">{{ _('Post') }}</button>
-                    </form>
-                </div>
-            </section>
-        </div>
     </div>
 {% endblock %}

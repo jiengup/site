@@ -35,11 +35,6 @@
             </div>
             <div class="content thirteen wide column">
               <span>
-                  {% with author=node.author, user=node.author.user %}
-                      <a href="{{ url('user_page', user.username) }}"  class="user">
-                          <img src="{{ gravatar(author, 135) }}"  class="gravatar">
-                      </a>
-                  {% endwith %}
                   {{ link_user(node.author) }}&nbsp;
               </span>
               <div class="metadata">
