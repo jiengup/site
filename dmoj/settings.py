@@ -574,3 +574,9 @@ try:
         exec(f.read(), globals())
 except IOError:
     pass
+
+# SchOJ-only features.
+
+# Share others' submissions to user if they got AC in a problem.
+# DMOJ design: True
+SCHOJ_SUBMISSION_SHARING = True

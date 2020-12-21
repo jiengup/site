@@ -1,4 +1,5 @@
 from . import registry
+from django.conf import settings
 
 
 @registry.function
@@ -15,6 +16,7 @@ def submission_layout(submission, profile_id, user, completed_problem_ids, edita
     elif profile_id == submission.user_id:
         can_view = True
     elif submission.problem_id in completed_problem_ids:
-        can_view = submission.problem.is_public or submission.problem_id in tester_problem_ids
+        if getattr(settings, "SCHOJ_SUBMISSION_SHARING", True):
+            can_view = submission.problem.is_public or submission.problem_id in tester_problem_ids
 
     return can_view, can_edit
