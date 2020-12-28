@@ -4,7 +4,7 @@ from itertools import groupby
 from operator import attrgetter
 
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist, PermissionDenied
 from django.db.models import Prefetch, Q
@@ -41,7 +41,7 @@ class SubmissionMixin(object):
     pk_url_kwarg = 'submission'
 
 
-class SubmissionDetailBase(LoginRequiredMixin, TitleMixin, SubmissionMixin, DetailView):
+class SubmissionDetailBase(LoginRequiredMixin, TitleMixin, SubmissionMixin, DetailView, PermissionRequiredMixin):
     def get_object(self, queryset=None):
         submission = super(SubmissionDetailBase, self).get_object(queryset)
         if not submission.can_see_detail(self.request.user):
@@ -65,6 +65,16 @@ class SubmissionDetailBase(LoginRequiredMixin, TitleMixin, SubmissionMixin, Deta
                                 reverse('user_page', args=[submission.user.user.username]),
                                 submission.user.user.username),
         })
+    def has_permission(self):
+        submission = self.object
+        user = self.request.user
+        if user.has_perm('judge.edit_all_problem') or problem_id in editable_problem_ids:
+            return True
+        elif user.has_perm('judge.view_all_submission'):
+            can_view = True
+        elif profile_id == submission.user_id:
+            can_view = True
+        return False
 
 
 class SubmissionSource(SubmissionDetailBase):
