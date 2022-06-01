@@ -17,7 +17,7 @@ django-statici18n
 pika
 ua-parser
 pyyaml
-jinja2==2
+jinja2>=2.11.2
 django_jinja
 llist
 requests
