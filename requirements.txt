@@ -35,3 +35,5 @@ martor @ git+https://github.com/DMOJ/martor.git
 netaddr
 webauthn<1
 bleach<5
+
+MarkupSafe==1.1.1
